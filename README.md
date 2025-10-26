@@ -38,8 +38,8 @@ machine, then open the project in Intellij IDEA.
 
 ### Prerequisites
 
-- Java 24 or higher
-- Maven 3.6.3+
+- Java 25 or higher
+- Docker Compose
 
 ### Quick Start
 
@@ -54,6 +54,7 @@ This will start:
 - Fluxzero Test Server on port 8888
 - Fluxzero Proxy on port 8080
 - OpenSearch Dashboards on localhost:5601
+- Third-party services needed for the exercises
 
 And once everything is running:
 
