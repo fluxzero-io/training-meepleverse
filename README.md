@@ -15,9 +15,9 @@ The existing unit tests use in-memory fixtures and mock the external payment, su
 They can be run without Docker using the Maven wrapper shown below.
 
 For local development with the Fluxzero CLI, run `fz dev --background --dev-server-version 1.20.6` from this directory.
-The Dev Server selects the matching SDK 1.x Test Server and Proxy, compiles the application and runs its tests.
+The Dev Server selects the matching SDK 1.x Test Server and Proxy, compiles the applications and manages their tests.
 The application initializes the catalog at startup. Authentication continues to use the training's `SenderProvider`.
-This minimal development configuration starts the application; it does not start the three external exercise services.
+The configuration starts Meepleverse and the PSP, supplier and shipper from source on the same local runtime.
 Use the proxy address reported by `fz dev status --json` for the existing `/catalog`, `/users` and `/orders` routes.
 Run `fz dev stop` to stop this local environment.
 
@@ -77,9 +77,11 @@ Open the reported gateway URL followed by `/_fluxzero/dev/` for the Devboard.
 Use Workspace, Tests and Audit trail to inspect the application, test results and messages.
 The Dev Server manages the local Test Server, Proxy and auditlog storage; a separate OpenSearch setup is not required.
 
-The external exercise services still need to be integrated into this refreshed setup before the complete order exercises
-can use this route. Their prebuilt JARs still embed SDK 1.9.0 and Spring Boot 3.5.0; updating the application POM does not
-update those binaries. The historical IntelliJ `docker-compose` configuration remains available for reference.
+The [exercise services](local/meepleverse-mocks/README.md) have been reconstructed from their original JARs and use
+the same SDK 1.292.48 / Spring Boot 4.1.2 baseline. The supplier callback uses a relative URL on the shared runtime;
+no fixed port or separately configured callback host is needed. Their intentional failures and delays remain intact.
+The original JARs remain unchanged as reconstruction references and for the historical Compose configuration.
+Those historical binaries still contain SDK 1.9.0 and Spring Boot 3.5.0; the Dev Server does not use them.
 
 ### API Endpoints
 
@@ -104,3 +106,5 @@ On Windows, without an active Dev Server:
 ```
 
 When the Dev Server is active, follow its managed test results instead of starting a second build.
+The separate exercise-service reactor also has [compatibility tests](local/meepleverse-mocks/README.md#compatibility-checks)
+against the original binaries.
