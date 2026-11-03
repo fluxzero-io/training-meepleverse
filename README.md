@@ -2,6 +2,25 @@
 
 This repository contains backend sources used in the **2-day in-person Flux Advanced Training**.
 
+## SDK 1.x course baseline
+
+The refreshed course uses **SDK 1.292.48**, pinned through `fluxzero.version` in `pom.xml`, and Java 25.
+Dependencies are resolved from the public Fluxzero Packages Maven repository and Maven Central.
+Keep this course on SDK 1.x when changing examples or consulting documentation.
+
+The existing unit tests use in-memory fixtures and mock the external payment, supplier and shipping services.
+They can be run without Docker using the Maven wrapper shown below.
+
+For local development with the Fluxzero CLI, run `fz dev --background --dev-server-version 1.20.6` from this directory.
+The Dev Server selects the matching SDK 1.x Test Server and Proxy, compiles the application and runs its tests.
+The application initializes the catalog at startup. Authentication continues to use the training's `SenderProvider`.
+This minimal development configuration starts the application; it does not start the three external exercise services.
+Use the proxy address reported by `fz dev status --json` for the existing `/catalog`, `/users` and `/orders` routes.
+Run `fz dev stop` to stop this local environment.
+
+The Docker Compose configurations below are the historical course stack, still pinned to runtime/proxy 1.56.0.
+They require separate qualification before use with the refreshed course. Do not start both runtime stacks for one exercise.
+
 ## Introduction
 
 In this training you’ll step into the world of **Meepleverse**, an e-commerce webapp for board games.
@@ -26,7 +45,7 @@ Over the course of two days, you will:
 - Repair errors retroactively in running systems
 - Evolve applications while they are in production
 - Discuss custom topics brought in by participants
-- Review recently released and upcoming Flux features
+- Review selected SDK 1.x improvements relevant to the exercises
 
 ## Setting up
 
@@ -38,27 +57,25 @@ machine, then open the project in Intellij IDEA.
 
 ### Prerequisites
 
-- Java 25 or higher
-- Docker Compose
+- JDK 25
+- Git and the Fluxzero CLI
+- An IDE such as IntelliJ IDEA
 
-### Quick Start
+### Dev Server
 
-Start the complete application stack:
+From the repository directory, in a terminal or Windows PowerShell:
 
-**From IntelliJ IDEA:**
+```text
+fz dev --background --dev-server-version 1.20.6
+fz dev status --json
+```
 
-- Run `docker-compose` (only needed once)
+Open the reported gateway URL followed by `/_fluxzero/dev/` for the Devboard.
+Use Workspace, Tests and Audit trail to inspect the application, test results and messages.
+The Dev Server manages the local Test Server, Proxy and auditlog storage; a separate OpenSearch setup is not required.
 
-This will start:
-
-- Fluxzero Test Server on port 8888
-- Fluxzero Proxy on port 8080
-- OpenSearch Dashboards on localhost:5601
-- Third-party services needed for the exercises
-
-And once everything is running:
-
-- Run `Meepleverse`
+The external exercise services still need to be integrated into this refreshed setup before the complete order exercises
+can use this route. The historical IntelliJ `docker-compose` configuration remains available for reference.
 
 ### API Endpoints
 
@@ -75,3 +92,11 @@ Once running, you can create new board game orders from `orders.http`.
 ```bash
 ./mvnw test
 ```
+
+On Windows, without an active Dev Server:
+
+```powershell
+.\mvnw.cmd test
+```
+
+When the Dev Server is active, follow its managed test results instead of starting a second build.

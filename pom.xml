@@ -15,14 +15,23 @@
 	<description>An e-commerce webapp for board games.</description>
 	<properties>
 		<java.version>25</java.version>
+		<fluxzero.version>1.292.48</fluxzero.version>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>fluxzero</id>
+			<url>https://packages.fluxzero.io/maven</url>
+			<snapshots><enabled>false</enabled></snapshots>
+		</repository>
+	</repositories>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>io.fluxzero</groupId>
 				<artifactId>fluxzero-bom</artifactId>
-				<version>1.27.0</version>
+				<version>${fluxzero.version}</version>
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
@@ -94,6 +103,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
+					<parameters>true</parameters>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>
@@ -102,6 +112,7 @@
 						<path>
 							<groupId>io.fluxzero</groupId>
 							<artifactId>sdk</artifactId>
+							<version>${fluxzero.version}</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>

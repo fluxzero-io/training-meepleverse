@@ -50,6 +50,7 @@ bin/
 *.log
 
 # Runtime data
+.fluxzero/dev/
 pids
 *.pid
 *.seed
