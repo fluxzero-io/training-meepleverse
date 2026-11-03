@@ -5,6 +5,9 @@ This repository contains backend sources used in the **2-day in-person Flux Adva
 ## SDK 1.x course baseline
 
 The refreshed course uses **SDK 1.292.48**, pinned through `fluxzero.version` in `pom.xml`, and Java 25.
+The build uses Spring Boot 4.1.2 and Maven 3.10.0 (via Maven Wrapper 3.3.4).
+Spring Boot's version is independent of the Fluxzero SDK major version: this remains an SDK 1.x course.
+Shared Jackson 2, JUnit, Logback and Jetty versions are aligned with the Fluxzero BOM in `pom.xml`.
 Dependencies are resolved from the public Fluxzero Packages Maven repository and Maven Central.
 Keep this course on SDK 1.x when changing examples or consulting documentation.
 
@@ -75,7 +78,8 @@ Use Workspace, Tests and Audit trail to inspect the application, test results an
 The Dev Server manages the local Test Server, Proxy and auditlog storage; a separate OpenSearch setup is not required.
 
 The external exercise services still need to be integrated into this refreshed setup before the complete order exercises
-can use this route. The historical IntelliJ `docker-compose` configuration remains available for reference.
+can use this route. Their prebuilt JARs still embed SDK 1.9.0 and Spring Boot 3.5.0; updating the application POM does not
+update those binaries. The historical IntelliJ `docker-compose` configuration remains available for reference.
 
 ### API Endpoints
 
