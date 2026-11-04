@@ -52,9 +52,20 @@ Over the course of two days, you will:
 
 ## Setting up
 
-Before continuing, make sure you have created your own fork of
-the [public Meepleverse repository](https://github.com/fluxzero-io/training-meepleverse). Next, clone this fork on your
-machine, then open the project in Intellij IDEA.
+For the November 2026 SDK 1.x course, follow the
+[participant preparation guide](https://training.fluxzero.io/advanced/preparation/).
+It covers Git, JDK 25, Fluxzero CLI installation on Windows/macOS/Linux, IDE setup
+and the readiness check. Use the course branch:
+
+```text
+git clone https://github.com/fluxzero-io/training-meepleverse.git
+cd training-meepleverse
+git switch chore/portbase-training-1x
+```
+
+A fork is optional. Open this folder in your Java IDE with JDK 25 selected for
+both the project and Maven. The CLI baseline is 1.21.1; it starts the explicitly
+selected Dev Server 1.20.6 without upgrading the application's SDK.
 
 ## Running the Application
 
@@ -76,6 +87,11 @@ fz dev status --json
 Open the reported gateway URL followed by `/_fluxzero/dev/` for the Devboard.
 Use Workspace, Tests and Audit trail to inspect the application, test results and messages.
 The Dev Server manages the local Test Server, Proxy and auditlog storage; a separate OpenSearch setup is not required.
+
+Complete one start before the course so the tools and dependencies are downloaded.
+You are ready when all four applications run, the Meepleverse application tests
+pass, Audit trail shows startup messages and `/catalog` returns 35 games.
+Run `fz dev stop` afterwards; start again using the same command during the course.
 
 The [exercise services](local/meepleverse-mocks/README.md) have been reconstructed from their original JARs and use
 the same SDK 1.292.48 / Spring Boot 4.1.2 baseline. The supplier callback uses a relative URL on the shared runtime;
