@@ -64,7 +64,7 @@ git switch chore/portbase-training-1x
 ```
 
 A fork is optional. Open this folder in your Java IDE with JDK 25 selected for
-both the project and Maven. The CLI baseline is 1.21.1; it starts the explicitly
+both the project and Maven. The CLI baseline is 1.21.3; it starts the explicitly
 selected Dev Server 1.20.6 without upgrading the application's SDK.
 
 ## Running the Application
