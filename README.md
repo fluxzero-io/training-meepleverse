@@ -54,7 +54,7 @@ Over the course of two days, you will:
 
 For the November 2026 SDK 1.x course, follow the
 [participant preparation guide](https://training.fluxzero.io/advanced/preparation/).
-It covers Git, JDK 25, Fluxzero CLI installation on Windows/macOS/Linux, IDE setup
+It covers Git, Fluxzero CLI installation on Windows/macOS/Linux, Java setup, IDE setup
 and the readiness check. Use the course branch:
 
 ```text
@@ -71,7 +71,7 @@ selected Dev Server 1.20.6 without upgrading the application's SDK.
 
 ### Prerequisites
 
-- JDK 25
+- JDK 25; `fz dev` offers installation through WinGet or Homebrew if no suitable JDK is found
 - Git and the Fluxzero CLI
 - An IDE such as IntelliJ IDEA
 
@@ -83,6 +83,11 @@ From the repository directory, in a terminal or Windows PowerShell:
 fz dev --background --dev-server-version 1.20.6
 fz dev status --json
 ```
+
+Run this in your own terminal. Accept the Java 25 installation prompt if shown;
+without WinGet or Homebrew, follow the manual JDK instructions in the preparation guide.
+The CLI downloads Dev Server and uses the repository's Maven wrapper; no separate Maven
+installation or wrapper check is needed before the first start. Select JDK 25 in your IDE too.
 
 Open the reported gateway URL followed by `/_fluxzero/dev/` for the Devboard.
 Use Workspace, Tests and Audit trail to inspect the application, test results and messages.
