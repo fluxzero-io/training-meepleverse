@@ -27,8 +27,9 @@ that shared runtime. When running against a separate Meepleverse host, set it
 to the host's HTTP base URL instead.
 
 Use the proxy URL reported by `fz dev status --json` for requests. Stop with
-`fz dev stop`. The Dev Server compiles and watches these sources; do not run a
-second Maven build while it is active. Native Windows execution still needs
+`fz dev stop`. This reactor includes its own Maven wrapper, matching the repository root,
+so Dev Server does not require a system Maven installation. The Dev Server
+compiles and watches these sources; do not run a second Maven build while it is active. Native Windows execution still needs
 qualification; the configuration does not require Bash, WSL or Docker.
 
 ## Preserved exercise behavior
